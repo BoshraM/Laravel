@@ -1,0 +1,157 @@
+Controller → prepares data
+Blade → displays data
+
+
+//--------Route------//
+
+| Method   | Purpose                 |
+| -------- | ----------------------- |
+| `GET`    | retrieve data           |
+| `POST`   | create data             |
+| `PUT`    | update data             |
+| `PATCH`  | partial update          |
+| `DELETE` | remove data             |
+| `ANY`    | accept all requests     |
+| `MATCH`  | accept specific methods |
+
+
+
+//---------------------CLASS------------------------//
+
+
+What Is a Class (In PHP)?
+
+A class is a blueprint for creating objects and organizing code.
+
+1.A class is simply a container that groups related functions together.
+2.These curly braces contain everything inside the class.
+3.public function function() This defines a method (function) inside the class.
+
+class HomeController
+{
+    public function index()
+    {
+        return "Home page";
+    }
+}
+
+
+class Car {
+    public function start() {
+        return "Car started";
+    }
+}
+
+web.php =>
+Route::get('/home', [HomeController::class, 'index']);
+
+
+
+//------------------------------------------//
+Laravel has a tool called Artisan that generates files automatically.
+example: php artisan make:controller HomeController
+
+//------------blade--------------------------//
+Blade uses: {{ variable }}
+**This prevents security problems like XSS attacks.
+
+
+//---------------COMMON NAME FOR ROUTES----------//
+
+| Route Name | Purpose             | Example URL     |
+| ---------- | ------------------- | --------------- |
+| `index`    | show all items      | `/posts`        |
+| `show`     | show one item       | `/posts/5`      |
+| `create`   | show form to create | `/posts/create` |
+| `store`    | save new item       | `/posts`        |
+| `edit`     | show edit form      | `/posts/5/edit` |
+| `update`   | update item         | `/posts/5`      |
+| `destroy`  | delete item         | `/posts/5`      |
+
+
+
+
+//-----------------Blade Layouts (Reusable Page Structure)////////
+to avoid repeating main structure in each page see app.blade.php in the view/layouts
+
+| Blade      | Purpose                                   |
+| ---------- | ----------------------------------------- |
+| `@extends` | inherit layout                            |
+| `@section` | define content                            |
+| `@yield`   | place content in layout                   |
+| '@include' | insert a Blade file into anotherBlade file|
+
+example for @include => @include('partials.nav')
+
+---PASSING DATA TO @include---
+@include('partials.nav', ['name' => 'Boshra'])
+
+---Difference Between @yield and @include---
+
+| Feature    | Purpose                     |
+| ---------- | --------------------------- |
+| `@yield`   | placeholder for child views |
+| `@include` | insert reusable Blade files |
+
+
+
+//-------------Form Validation in Laravel---------------//
+| Rule      | Purpose                    |
+| --------- | -------------------------- |
+| required  | field must exist           |
+| email     | valid email format         |
+| numeric   | must be a number           |
+| min:3     | minimum length             |
+| max:50    | maximum length             |
+| confirmed | password confirmation      |
+| unique    | must be unique in database |
+
+
+
+
+///-----------------------------DATABASE------------------------------///
+
+#Laravel usually uses MySQL or SQLite.
+
+in .env we have 
+DB_CONNECTION=sqlite
+# DB_HOST=127.0.0.1
+# DB_PORT=3306
+# DB_DATABASE=laravel
+# DB_USERNAME=root
+# DB_PASSWORD=
+
+in this project we start whit SQLite
+1_create dataasbe ==> touch database/database.sqlite
+---------------------------------
+#Laravel already has migrations for users, password resets, etc.
+
+What a Migration Is:
+A migration is a version-controlled database structure file.
+2-php artisan migrate
+what coommand above does ?
+1️⃣ looks inside:  ==>database/migrations
+
+2️⃣ finds migration files that are Pending
+
+3️⃣ runs them
+
+4️⃣ creates the database tables
+
+5️⃣ records them in the migrations table
+-----------------------------------
+3#create our awn table 
+3- php artisan make:model Post -m. then php artisan migrate
+it generats a file in database/migration with the name like creat_posts_table 
+which has a default table which we can customize it in case of my practice I updated as :
+    Schema::create('posts', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->text('content');
+            $table->timestamps();
+        });
+
+then run command php artisan migrate i can use php artisan migrate:rollback to rest databse 
+
+
+4_insert data to the table
