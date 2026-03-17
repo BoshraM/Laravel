@@ -154,4 +154,20 @@ which has a default table which we can customize it in case of my practice I upd
 then run command php artisan migrate i can use php artisan migrate:rollback to rest databse 
 
 
-4_insert data to the table
+//---------insert data to the table----------\\
+-----CRUD------
+First we add the code below to app/Models/psot.php 
+class Post extends Model
+{
+    protected $fillable = ['title', 'content'];
+}
+
+which for tellimg Laravel :These fields are allowed to be inserted.
+
+CRUD stands for Create, Read, Update, delete
+post,get,put,delete route  Do these jobs example finds in web.php
+In home contoroler we add publice functions for each method which we can find them.
+the name has been used , STORE for saveing , Show for reading , edit for geting exact post and then update and delete. 
+
+
+
