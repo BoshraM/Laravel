@@ -115,7 +115,7 @@ class HomeController extends Controller
 
     //***we updated the top with the below for storing data*****//
 
-     public function store(Request $request)
+    public function store(Request $request)
     {
         Post::create([
             'title' => $request->title,
@@ -123,6 +123,33 @@ class HomeController extends Controller
         ]);
 
         // return "Post saved successfully!";
+        return redirect()->route('home');
+    }
+
+    public function edit($id)
+    {
+        $post = Post::find($id);
+
+        return view('edit', compact('post'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $post = Post::find($id);
+
+        $post->update([
+            'title' => $request->title,
+            'content' => $request->content
+        ]);
+
+        return redirect()->route('home');
+    }
+
+    public function destroy($id)
+    {
+        $post = Post::find($id);
+        $post->delete();
+
         return redirect()->route('home');
     }
 };

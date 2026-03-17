@@ -115,8 +115,9 @@ Route::get('/routename', function () {
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/post/{id}', [HomeController::class, 'show']);
-
-
+Route::get('/posts/{id}/edit', [HomeController::class, 'edit'])->name('posts.edit');
+Route::put('/posts/{id}', [HomeController::class, 'update'])->name('posts.update');
+Route::delete('/posts/{id}', [HomeController::class, 'destroy'])->name('posts.destroy');
 //----------------------9------------------------------//
 
 //9) Route → View (Shortcut)

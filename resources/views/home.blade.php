@@ -24,7 +24,15 @@
     <div>
         <h2>{{ $post->title }}</h2>
         <p>{{ $post->content }}</p>
-        <hr>
+        <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
+        <form method="POST" action="{{ route('posts.destroy', $post->id) }}">
+          @csrf
+          @method('DELETE')
+
+          <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+        </form>
+    <hr>
+
     </div>
 @empty
     <p>No posts found.</p>
