@@ -164,13 +164,14 @@ class Post extends Model
 
 which for tellimg Laravel :These fields are allowed to be inserted.
 
-CRUD stands for Create, Read, Update, delete
+#CRUD stands for Create, Read, Update, delete
 post,get,put,delete route  Do these jobs example finds in web.php
 In home contoroler we add publice functions for each method which we can find them.
 the name has been used , STORE for saveing , Show for reading , edit for geting exact post and then update and delete. 
 
 *** Instead of writing crud manully Laravel, create all CRUD routes for posts automatically
 Route::resource('posts', PostController::class); ==>adding this to web.php
+php artisan make:controller PostController --resource ==> this cammand create PostController.php with the function structure in it which we can add the functions
 Laravel create this route
 | Action        | URL              | Method | Controller |
 | ------------- | ---------------- | ------ | ---------- |
