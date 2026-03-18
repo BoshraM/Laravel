@@ -257,3 +257,15 @@ Later, you can make only some routes public and some protected.
 
 
 ///-------------------------Authorization-----------------------//
+by adding below to edit,update,and delet functions in postcontrollet we return 404 if the post not belongs to the suer to edit.
+ if ($post->user_id !== auth()->id()) {
+    abort(403);// stop here and show “Forbidden”
+}
+
+also by checking usier in ui we can hide edit adn delete buttons
+@if ($post->user_id === auth()->id())
+@endif
+
+overall ==>
+Authentication → who are you?
+Authorization → what can you do?

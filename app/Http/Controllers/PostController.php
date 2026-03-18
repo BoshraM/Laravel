@@ -59,6 +59,9 @@ class PostController extends Controller
     public function edit(string $id)
     {
         $post = Post::find($id);
+        if ($post->user_id !== auth()->id()) {
+            abort(403);
+        }
 
         return view('posts.edit', compact('post'));
     }
@@ -68,12 +71,18 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
+    
+
+        $post = Post::find($id);
+
+         if ($post->user_id !== auth()->id()) {
+            abort(403);
+        }
+
         $request->validate([
             'title' => 'required|min:3',
             'content' => 'required'
         ]);
-
-        $post = Post::find($id);
 
         $post->update([
             'title' => $request->title,
@@ -89,6 +98,11 @@ class PostController extends Controller
     public function destroy(string $id)
     {
         $post = Post::find($id);
+
+        if ($post->user_id !== auth()->id()) {
+            abort(403);// stop here and show “Forbidden”
+        }
+
         $post->delete();
 
         return redirect()->route('posts.index');
