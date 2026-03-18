@@ -189,5 +189,24 @@ resources/views/posts/create.blade.php
 resources/views/posts/edit.blade.php
 resources/views/posts/show.blade.php
 
-//--------------------VALIDATION------------------//
+//------------------------------------VALIDATION--------------------------------------//
 #Add Validation to store() and update()
+
+//-------------------------------------REALTIONSHIP------------------------------------//
+A relationship means:
+
+#one table is connected to another table
+
+Add user_id to the posts table using command below
+php artisan make:migration add_user_id_to_posts_table --table=posts
+
+we update the migration file created by command above to create foreign id for user
+and then run ==> php artisan migrate
+
+update user.php nad post.pho in Models folder
+
+Post
+ └── belongs to one User
+
+User
+ └── has many Posts
