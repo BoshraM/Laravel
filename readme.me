@@ -338,3 +338,14 @@ use
 summurry
 Controller → asks permission
 Policy → decides yes or no
+
+
+
+//----------------------------Pagination-----------------------------//
+by updating index function in postcontroller with $posts = Post::paginate(5); display 5 posts per one page 
+addning {{ $posts->links() }} to below the loop for getting post it adds pagination to the ui , diplay previes next under the posts.
+byadding pagination 
+ ✅ faster
+✅ scalable
+✅ professional
+Pagination = split data into pages instead of loading everything

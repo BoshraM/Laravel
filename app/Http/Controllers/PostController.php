@@ -11,8 +11,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-
+        // $posts = Post::all();
+       // $posts = Post::paginate(5);//by this just get 5 posts per page
+        $posts = Post::latest()->paginate(5);//thsi diplay from latest posts
         return view('posts.index', compact('posts'));
     }
 

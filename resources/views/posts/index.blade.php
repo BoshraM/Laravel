@@ -29,3 +29,5 @@
 @empty
     <p>No posts found.</p>
 @endforelse
+
+{{ $posts->links() }}
