@@ -36,7 +36,8 @@ class PostController extends Controller
 
         Post::create([
             'title' => $request->title,
-            'content' => $request->content
+            'content' => $request->content,
+            'user_id' => 1
         ]);
 
         return redirect()->route('posts.index');
