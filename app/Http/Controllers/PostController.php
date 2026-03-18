@@ -59,9 +59,7 @@ class PostController extends Controller
     public function edit(string $id)
     {
         $post = Post::find($id);
-        if ($post->user_id !== auth()->id()) {
-            abort(403);
-        }
+       $this->authorize('update', $post);
 
         return view('posts.edit', compact('post'));
     }
@@ -75,9 +73,7 @@ class PostController extends Controller
 
         $post = Post::find($id);
 
-         if ($post->user_id !== auth()->id()) {
-            abort(403);
-        }
+      $this->authorize('update', $post);
 
         $request->validate([
             'title' => 'required|min:3',
@@ -99,9 +95,7 @@ class PostController extends Controller
     {
         $post = Post::find($id);
 
-        if ($post->user_id !== auth()->id()) {
-            abort(403);// stop here and show “Forbidden”
-        }
+        $this->authorize('delete', $post);
 
         $post->delete();
 

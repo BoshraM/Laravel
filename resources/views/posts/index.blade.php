@@ -12,15 +12,18 @@
         <p>{{ $post->content }}</p>
         <p>Author: {{ $post->user?->name ?? 'No author' }}</p>
         <a href="{{ route('posts.show', $post->id) }}">View</a>
-        @if ($post->user_id === auth()->id())
-                <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
+        @can('update', $post)
+            <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
+        @endcan
 
-                <form method="POST" action="{{ route('posts.destroy', $post->id) }}" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Delete</button>
-                </form>
-            @endif
+        @can('delete', $post)
+            <form method="POST" action="{{ route('posts.destroy', $post->id) }}" style="display:inline;">
+                @csrf
+                @method('DELETE')
+                <button type="submit">Delete</button>
+            </form>
+        @endcan
+        
         <hr>
     </div>
 @empty
