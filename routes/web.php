@@ -3,6 +3,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -114,10 +116,10 @@ Route::get('/routename', function () {
 // index ==> Function inside controller
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/post/{id}', [HomeController::class, 'show']);
-Route::get('/posts/{id}/edit', [HomeController::class, 'edit'])->name('posts.edit');
-Route::put('/posts/{id}', [HomeController::class, 'update'])->name('posts.update');
-Route::delete('/posts/{id}', [HomeController::class, 'destroy'])->name('posts.destroy');
+// Route::get('/post/{id}', [HomeController::class, 'show']);
+// Route::get('/posts/{id}/edit', [HomeController::class, 'edit'])->name('posts.edit');
+// Route::put('/posts/{id}', [HomeController::class, 'update'])->name('posts.update');
+// Route::delete('/posts/{id}', [HomeController::class, 'destroy'])->name('posts.destroy');
 //----------------------9------------------------------//
 
 //9) Route → View (Shortcut)
@@ -137,3 +139,7 @@ Route::view('/about', 'about');
 // | MVC built-in       | You build structure yourself |
 // | Blade templating   | Many template engines        |
 // | Eloquent ORM       | Many database libraries      |
+
+
+/////-------------------Resource-----------------------------///
+Route::resource('posts', PostController::class);

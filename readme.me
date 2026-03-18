@@ -169,5 +169,21 @@ post,get,put,delete route  Do these jobs example finds in web.php
 In home contoroler we add publice functions for each method which we can find them.
 the name has been used , STORE for saveing , Show for reading , edit for geting exact post and then update and delete. 
 
+*** Instead of writing crud manully Laravel, create all CRUD routes for posts automatically
+Route::resource('posts', PostController::class); ==>adding this to web.php
+Laravel create this route
+| Action        | URL              | Method | Controller |
+| ------------- | ---------------- | ------ | ---------- |
+| List posts    | /posts           | GET    | index()    |
+| Show form     | /posts/create    | GET    | create()   |
+| Save post     | /posts           | POST   | store()    |
+| Show one post | /posts/{id}      | GET    | show()     |
+| Edit form     | /posts/{id}/edit | GET    | edit()     |
+| Update post   | /posts/{id}      | PUT    | update()   |
+| Delete post   | /posts/{id}      | DELETE | destroy()  |
 
-
+the narmal  structure in laravel be 
+resources/views/posts/index.blade.php
+resources/views/posts/create.blade.php
+resources/views/posts/edit.blade.php
+resources/views/posts/show.blade.php
