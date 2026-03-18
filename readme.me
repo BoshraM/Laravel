@@ -269,3 +269,72 @@ also by checking usier in ui we can hide edit adn delete buttons
 overall ==>
 Authentication → who are you?
 Authorization → what can you do?
+
+
+//----------------------------Policies-----------------------------//
+1️⃣ What is a Policy?
+
+👉 A Policy is a class that contains permission rules
+Can user edit this post?
+Can user delete this post?
+Policy = centralized permission rules
+2️⃣ Create a Policy
+php artisan make:policy PostPolicy --model=Post
+
+generate the PostPolicy.php in app/Policies
+
+3️⃣-Add your rule
+public function update(User $user, Post $post): bool
+{
+    return $user->id === $post->user_id;
+}
+
+public function delete(User $user, Post $post): bool
+{
+    return $user->id === $post->user_id;
+}
+
+Allow only if:
+user.id == post.user_id
+
+4️⃣ Register the Policy for old version by adding code below to app/Providers/AuthServiceProvider.php
+use App\Models\Post;
+use App\Policies\PostPolicy;
+
+protected $policies = [
+    Post::class => PostPolicy::class,
+];
+
+5️⃣ Use Policy in Controller in update,edit and delete function
+$this->authorize('update', $post); ==>edit and update
+$this->authorize('delete', $post); ==> delete
+**ERROR might show for editeing which solce by adding below to controller
+
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as BaseController;
+
+abstract class Controller extends BaseController
+{
+    use AuthorizesRequests, ValidatesRequests;
+}
+
+6️⃣ Use Policy in Blade
+instead of 
+@if ($post->user_id === auth()->id())
+
+use
+@can('update', $post)
+    <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
+@endcan
+
+## Why Policies are better
+| Before                  | Now                 |
+| ----------------------- | ------------------- |
+| logic inside controller | logic inside policy |
+| repeated code           | reusable            |
+| harder to maintain      | clean structure     |
+
+summurry
+Controller → asks permission
+Policy → decides yes or no
