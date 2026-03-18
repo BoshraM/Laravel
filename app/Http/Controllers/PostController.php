@@ -29,6 +29,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|min:3',
+            'content' => 'required'
+        ]);
+
         Post::create([
             'title' => $request->title,
             'content' => $request->content
@@ -62,6 +67,11 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'title' => 'required|min:3',
+            'content' => 'required'
+        ]);
+
         $post = Post::find($id);
 
         $post->update([

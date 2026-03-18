@@ -115,41 +115,41 @@ class HomeController extends Controller
 
     //***we updated the top with the below for storing data*****//
 
-    public function store(Request $request)
-    {
-        Post::create([
-            'title' => $request->title,
-            'content' => $request->content
-        ]);
+    // public function store(Request $request)
+    // {
+    //     Post::create([
+    //         'title' => $request->title,
+    //         'content' => $request->content
+    //     ]);
 
-        // return "Post saved successfully!";
-        return redirect()->route('home');
-    }
+    //     // return "Post saved successfully!";
+    //     return redirect()->route('home');
+    // }
 
-    public function edit($id)
-    {
-        $post = Post::find($id);
+    // public function edit($id)
+    // {
+    //     $post = Post::find($id);
 
-        return view('edit', compact('post'));
-    }
+    //     return view('edit', compact('post'));
+    // }
 
-    public function update(Request $request, $id)
-    {
-        $post = Post::find($id);
+    // public function update(Request $request, $id)
+    // {
+    //     $post = Post::find($id);
 
-        $post->update([
-            'title' => $request->title,
-            'content' => $request->content
-        ]);
+    //     $post->update([
+    //         'title' => $request->title,
+    //         'content' => $request->content
+    //     ]);
 
-        return redirect()->route('home');
-    }
+    //     return redirect()->route('home');
+    // }
 
-    public function destroy($id)
-    {
-        $post = Post::find($id);
-        $post->delete();
+    // public function destroy($id)
+    // {
+    //     $post = Post::find($id);
+    //     $post->delete();
 
-        return redirect()->route('home');
-    }
+    //     return redirect()->route('home');
+    // }
 };
