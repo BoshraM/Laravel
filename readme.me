@@ -210,3 +210,50 @@ Post
 
 User
  └── has many Posts
+
+
+ //---------------------Authentication------------------//
+ Authentication means:
+
+register
+
+login
+
+logout
+
+know who the current user is
+
+1. Install Laravel auth scaffolding
+The easiest beginner-friendly way is Laravel Breeze.
+
+//composer require laravel/breeze --dev
+php artisan breeze:install
+npm install
+npm run build
+php artisan migrate//
+
+THIS WILL CRAET ALL REGISTRATION AND LOGIN STAFF AND PAGE  
+2. Register a user
+-Start the app ==> php artisan serve
+http://localhost:8000/register ==>user can regester and go to the dashboard
+
+summurry
+Register / Login
+↓
+Create post
+↓
+auth()->id()
+↓
+save user_id
+↓
+Post belongs to current user
+
+adding below mahe all post pages require login.
+Route::middleware('auth')->group(function () {
+    Route::resource('posts', PostController::class);
+});
+
+Later, you can make only some routes public and some protected.
+
+
+///-------------------------Authorization-----------------------//

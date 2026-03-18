@@ -1,5 +1,7 @@
 <h1>All Posts</h1>
-
+@if (auth()->check())
+    <p>Logged in as: {{ auth()->user()->name }}</p>
+@endif
 <a href="{{ route('posts.create') }}">Create New Post</a>
 
 <hr>
